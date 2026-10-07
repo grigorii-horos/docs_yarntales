@@ -1,13 +1,13 @@
 <template>
-  <li v-if="node.type === 'directory'">
+  <div>
     <div 
-      class="folder-label" 
+      class="nav-item" 
       @click="$emit('navigate', node.path)"
       :class="{ active: currentPath === node.path }"
     >
-      <span class="icon">📁</span> {{ node.name }}
+      <span class="icon">📁</span> <span class="name">{{ node.name }}</span>
     </div>
-    <ul v-if="node.children && node.children.length > 0" class="sub-tree">
+    <div v-if="node.children && node.children.length > 0" class="sub-tree">
       <TreeNode 
         v-for="child in node.children" 
         :key="child.path" 
@@ -15,8 +15,8 @@
         :currentPath="currentPath"
         @navigate="$emit('navigate', $event)"
       />
-    </ul>
-  </li>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -31,19 +31,20 @@ export default {
 </script>
 
 <style scoped>
-.folder-label {
+.nav-item {
+  padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+  border-radius: 0 16px 16px 0;
   cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 4px;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: #3c4043;
+  margin-bottom: 2px;
 }
-.folder-label:hover { background: #e5e7eb; }
-.folder-label.active { background: #d1d5db; font-weight: bold; }
+.nav-item:hover { background: #f1f3f4; }
+.nav-item.active { background: #e8f0fe; color: #1a73e8; }
+.name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sub-tree {
-  list-style: none;
-  padding-left: 1.5rem;
-  margin: 0;
+  padding-left: 1rem;
 }
 </style>

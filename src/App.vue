@@ -1,104 +1,159 @@
 <template>
-  <div class="explorer">
-    <header class="header">
-      <h1>Yarntales Files</h1>
+  <div class="drive-app">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="logo">
+        <svg viewBox="0 0 40 40" class="icon-logo"><path fill="#FFC107" d="M13.4 29.5L6.6 18h13.4l6.6 11.5z"/><path fill="#4CAF50" d="M26.8 29.5H13.4l-6.8-11.5h13.4z"/><path fill="#2196F3" d="M26.8 6.5L20 18l6.8 11.5L33.4 18z"/></svg>
+        <span>Yarntales Drive</span>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search in Drive (demo)" v-model="searchQuery" />
+      </div>
+      <div class="profile">
+        <div class="avatar">U</div>
+      </div>
     </header>
     
-    <main class="main-content">
-      <!-- Sidebar / Tree -->
-      <div class="sidebar">
-        <h3>Navigation</h3>
-        <ul class="tree-list">
-          <li @click="navigate('/')" :class="{ active: currentPath === '/' }">📁 Root</li>
-          <tree-node 
-            v-for="node in tree" 
+    <div class="main-layout">
+      <!-- Left Sidebar -->
+      <aside class="left-sidebar">
+        <div class="nav-item active" @click="navigate('/')">
+          <span class="icon">💾</span> My Drive
+        </div>
+        <div class="nav-tree">
+           <tree-node 
+            v-for="node in folderTree" 
             :key="node.path" 
             :node="node" 
             :currentPath="currentPath"
             @navigate="navigate"
           />
-        </ul>
-      </div>
+        </div>
+      </aside>
 
-      <!-- Content Area -->
-      <div class="content">
-        <!-- Breadcrumbs -->
+      <!-- Main Content -->
+      <main class="content-area">
         <div class="breadcrumbs">
-          <span @click="navigate('/')">Root</span>
+          <span class="crumb" @click="navigate('/')">My Drive</span>
           <span v-for="(crumb, idx) in breadcrumbs" :key="idx">
-            / <span @click="navigate(crumb.path)">{{ crumb.name }}</span>
+             <span class="separator">›</span> 
+             <span class="crumb" @click="navigate(crumb.path)">{{ crumb.name }}</span>
           </span>
         </div>
 
-        <!-- Folder View -->
-        <div class="grid" v-if="!selectedFile">
-          <div 
-            class="card" 
-            v-for="item in currentFolderContents" 
-            :key="item.path"
-            @click="handleItemClick(item)"
-          >
-            <div class="icon">
-              <img v-if="item.preview" :src="item.preview" class="thumbnail" alt="Thumb" />
-              <span v-else>{{ item.type === 'directory' ? '📁' : '📄' }}</span>
-            </div>
-            <div class="details">
-              <div class="name">{{ item.name }}</div>
-              <div class="meta" v-if="item.meta && item.meta.description">
-                {{ item.meta.description }}
+        <div class="scroll-area" @click="clearSelection">
+          <!-- Folders -->
+          <div v-if="folders.length > 0" class="section">
+            <h3>Folders</h3>
+            <div class="grid folders-grid">
+              <div 
+                class="folder-card" 
+                v-for="folder in folders" 
+                :key="folder.path"
+                :class="{ selected: selectedItem === folder }"
+                @click.stop="selectItem(folder)"
+                @dblclick.stop="navigate(folder.path)"
+              >
+                <span class="icon">📁</span>
+                <span class="name">{{ folder.name }}</span>
               </div>
             </div>
           </div>
-          <div v-if="currentFolderContents.length === 0" class="empty">
-            Folder is empty
-          </div>
-        </div>
 
-        <!-- File Preview -->
-        <div class="file-view" v-else>
-          <div class="actions">
-            <button @click="selectedFile = null">⬅ Back to Folder</button>
-            <a :href="selectedFile.path" download class="btn-download">⬇ Download</a>
-          </div>
-          
-          <div class="preview-container">
-            <div class="preview-pane">
-              <img v-if="selectedFile.preview" :src="selectedFile.preview" alt="Preview" />
-              <img v-else-if="isImage(selectedFile.name)" :src="selectedFile.path" alt="Preview" />
-              <iframe v-else-if="isPdf(selectedFile.name)" :src="selectedFile.path" frameborder="0"></iframe>
-              <div v-else class="no-preview">
-                No visual preview available for this file type.
-              </div>
-            </div>
-            
-            <div class="meta-pane">
-              <h3>Metadata</h3>
-              <div v-if="selectedFile.meta">
-                <div class="meta-item" v-for="(value, key) in selectedFile.meta" :key="key">
-                  <strong>{{ key }}:</strong> {{ value }}
+          <!-- Files -->
+          <div v-if="files.length > 0" class="section">
+            <h3>Files</h3>
+            <div class="grid files-grid">
+              <div 
+                class="file-card" 
+                v-for="file in files" 
+                :key="file.path"
+                :class="{ selected: selectedItem === file }"
+                @click.stop="selectItem(file)"
+                @dblclick.stop="openPreview(file)"
+              >
+                <div class="thumbnail-wrapper">
+                  <img v-if="file.preview" :src="file.preview" class="thumbnail" />
+                  <span v-else class="file-icon">📄</span>
+                </div>
+                <div class="file-info">
+                  <span class="icon">📄</span>
+                  <span class="name">{{ file.name }}</span>
                 </div>
               </div>
-              <div v-else>No metadata available.</div>
-              
-              <hr />
-              <div class="meta-item"><strong>Size:</strong> {{ formatBytes(selectedFile.size) }}</div>
-              <div class="meta-item"><strong>Updated:</strong> {{ new Date(selectedFile.updatedAt).toLocaleString() }}</div>
             </div>
           </div>
+          
+          <div v-if="folders.length === 0 && files.length === 0" class="empty-state">
+            This folder is empty.
+          </div>
+        </div>
+      </main>
+
+      <!-- Right Sidebar (Info/Meta) -->
+      <aside class="right-sidebar" v-if="selectedItem">
+        <div class="info-header">
+          <h3>{{ selectedItem.type === 'directory' ? '📁' : '📄' }} {{ selectedItem.name }}</h3>
+          <button @click="selectedItem = null" class="close-btn">✕</button>
+        </div>
+        <div class="info-content">
+          <div class="info-preview" v-if="selectedItem.type === 'file'">
+             <img v-if="selectedItem.preview" :src="selectedItem.preview" />
+             <div v-else class="placeholder">No Preview</div>
+          </div>
+          
+          <div class="meta-section">
+            <h4>Properties</h4>
+            <div class="meta-row"><span>Type</span> <span>{{ selectedItem.type }}</span></div>
+            <div class="meta-row" v-if="selectedItem.type === 'file'"><span>Size</span> <span>{{ formatBytes(selectedItem.size) }}</span></div>
+            <div class="meta-row"><span>Modified</span> <span>{{ new Date(selectedItem.updatedAt).toLocaleDateString() }}</span></div>
+          </div>
+
+          <div class="meta-section" v-if="selectedItem.meta">
+            <h4>Metadata</h4>
+            <div class="meta-row" v-for="(val, key) in selectedItem.meta" :key="key">
+              <span>{{ key }}</span> <span>{{ val }}</span>
+            </div>
+          </div>
+
+          <div class="actions" v-if="selectedItem.type === 'file'">
+             <a :href="selectedItem.path" download class="btn primary">Download</a>
+             <button @click="openPreview(selectedItem)" class="btn">Open Preview</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Fullscreen Preview Modal -->
+    <div class="modal-overlay" v-if="previewItem" @click="previewItem = null">
+      <div class="modal-content" @click.stop>
+        <header class="modal-header">
+          <div class="modal-title">📄 {{ previewItem.name }}</div>
+          <div class="modal-actions">
+            <a :href="previewItem.path" download class="btn primary">Download</a>
+            <button @click="previewItem = null" class="close-btn">✕</button>
+          </div>
+        </header>
+        <div class="modal-body">
+          <img v-if="previewItem.preview" :src="previewItem.preview" />
+          <img v-else-if="isImage(previewItem.name)" :src="previewItem.path" />
+          <iframe v-else-if="isPdf(previewItem.name)" :src="previewItem.path"></iframe>
+          <div v-else class="no-preview">Preview not available</div>
         </div>
       </div>
-    </main>
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-
 import TreeNode from './components/TreeNode.vue'
 
 const tree = ref([])
 const currentPath = ref('/')
-const selectedFile = ref(null)
+const selectedItem = ref(null)
+const previewItem = ref(null)
+const searchQuery = ref('')
 
 onMounted(async () => {
   try {
@@ -121,16 +176,29 @@ function findNode(nodes, path) {
 }
 
 const currentFolderContents = computed(() => {
+  let items = []
   if (currentPath.value === '/') {
-    return tree.value
+    items = tree.value
+  } else {
+    const folder = findNode(tree.value, currentPath.value)
+    items = folder && folder.children ? folder.children : []
   }
-  const folder = findNode(tree.value, currentPath.value)
-  return folder && folder.children ? folder.children : []
+  
+  if (searchQuery.value) {
+    // Simple flat search for demo
+    const query = searchQuery.value.toLowerCase()
+    return items.filter(i => i.name.toLowerCase().includes(query))
+  }
+  return items
 })
+
+const folders = computed(() => currentFolderContents.value.filter(i => i.type === 'directory'))
+const files = computed(() => currentFolderContents.value.filter(i => i.type === 'file'))
+const folderTree = computed(() => tree.value.filter(i => i.type === 'directory'))
 
 const breadcrumbs = computed(() => {
   if (currentPath.value === '/') return []
-  const parts = currentPath.value.replace('/data/', '').split('/')
+  const parts = currentPath.value.replace('/data/', '').split('/').filter(Boolean)
   let acc = '/data'
   return parts.map(p => {
     acc += '/' + p
@@ -140,25 +208,24 @@ const breadcrumbs = computed(() => {
 
 function navigate(path) {
   currentPath.value = path
-  selectedFile.value = null
+  selectedItem.value = null
+  searchQuery.value = ''
 }
 
-function handleItemClick(item) {
-  if (item.type === 'directory') {
-    navigate(item.path)
-  } else {
-    selectedFile.value = item
-  }
+function selectItem(item) {
+  selectedItem.value = item
 }
 
-function isImage(name) {
-  return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(name)
+function clearSelection() {
+  selectedItem.value = null
 }
 
-function isPdf(name) {
-  return /\.pdf$/i.test(name)
+function openPreview(file) {
+  previewItem.value = file
 }
 
+function isImage(name) { return /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(name) }
+function isPdf(name) { return /\.pdf$/i.test(name) }
 function formatBytes(bytes) {
   if (!bytes) return '0 B'
   const k = 1024
@@ -169,121 +236,139 @@ function formatBytes(bytes) {
 </script>
 
 <style scoped>
-.explorer {
+.drive-app {
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
-.header {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #202124;
   background: #fff;
-  border-bottom: 1px solid #e5e7eb;
-  padding: 1rem 2rem;
-}
-.header h1 { margin: 0; font-size: 1.25rem; }
-.main-content {
-  display: flex;
-  flex: 1;
   overflow: hidden;
 }
-.sidebar {
-  width: 250px;
-  background: #f3f4f6;
-  border-right: 1px solid #e5e7eb;
-  padding: 1rem;
-  overflow-y: auto;
-}
-.tree-list { list-style: none; padding: 0; margin: 0; }
-.tree-list li {
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 4px;
-}
-.tree-list li:hover { background: #e5e7eb; }
-.tree-list li.active { background: #d1d5db; font-weight: bold; }
 
-.content {
-  flex: 1;
-  padding: 2rem;
-  overflow-y: auto;
-}
-.breadcrumbs {
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-}
-.breadcrumbs span { cursor: pointer; color: #2563eb; }
-.breadcrumbs span:hover { text-decoration: underline; }
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-}
-.card {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 1rem;
-  cursor: pointer;
+/* Topbar */
+.topbar {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  transition: shadow 0.2s;
-}
-.card:hover { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-.card .icon { font-size: 2rem; display: flex; align-items: center; justify-content: center; }
-.thumbnail { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; }
-.card .name { font-weight: 500; word-break: break-all; }
-.card .meta { font-size: 0.8rem; color: #6b7280; margin-top: 0.25rem; }
-
-.empty { color: #6b7280; font-style: italic; }
-
-.file-view {
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 2rem;
-}
-.actions {
-  display: flex;
   justify-content: space-between;
-  margin-bottom: 2rem;
+  padding: 0.5rem 1.5rem;
+  border-bottom: 1px solid #dadce0;
+  height: 64px;
 }
-button, .btn-download {
-  padding: 0.5rem 1rem;
-  background: #2563eb;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-}
-button:hover, .btn-download:hover { background: #1d4ed8; }
-
-.preview-container {
-  display: flex;
-  gap: 2rem;
-}
-.preview-pane {
-  flex: 2;
-  border: 1px solid #e5e7eb;
+.logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem; color: #5f6368; }
+.icon-logo { width: 32px; height: 32px; }
+.search-bar input {
+  width: 500px;
+  padding: 0.8rem 1rem;
   border-radius: 8px;
-  background: #f9fafb;
-  min-height: 400px;
+  border: none;
+  background: #f1f3f4;
+  font-size: 1rem;
+}
+.search-bar input:focus { background: #fff; box-shadow: 0 1px 1px 0 rgba(65,69,73,0.3), 0 1px 3px 1px rgba(65,69,73,0.15); outline: none; }
+.profile .avatar { width: 32px; height: 32px; background: #1a73e8; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; }
+
+/* Main Layout */
+.main-layout { display: flex; flex: 1; overflow: hidden; }
+
+/* Left Sidebar */
+.left-sidebar {
+  width: 250px;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+}
+.nav-item {
+  padding: 0.5rem 1.5rem;
+  border-radius: 0 16px 16px 0;
+  margin-right: 1rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 1rem;
+  color: #3c4043;
+}
+.nav-item:hover { background: #f1f3f4; }
+.nav-item.active { background: #e8f0fe; color: #1a73e8; }
+.nav-tree { padding-left: 1.5rem; margin-top: 1rem; overflow-y: auto; }
+
+/* Content Area */
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  margin-top: 1rem;
   overflow: hidden;
 }
-.preview-pane img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.preview-pane iframe { width: 100%; height: 600px; }
-.no-preview { color: #6b7280; }
+.breadcrumbs { padding: 1rem 2rem; font-size: 1.1rem; color: #5f6368; border-bottom: 1px solid #f1f3f4; }
+.crumb { cursor: pointer; padding: 0.2rem 0.5rem; border-radius: 4px; }
+.crumb:hover { background: #f1f3f4; }
+.separator { margin: 0 0.2rem; }
 
-.meta-pane {
-  flex: 1;
-  background: #f9fafb;
-  padding: 1.5rem;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
+.scroll-area { flex: 1; padding: 1rem 2rem; overflow-y: auto; }
+.section h3 { font-size: 0.9rem; font-weight: 500; color: #5f6368; margin-bottom: 1rem; }
+.grid { display: grid; gap: 1rem; margin-bottom: 2rem; }
+
+/* Folders */
+.folders-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.folder-card {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.8rem 1rem; border: 1px solid #dadce0; border-radius: 6px; cursor: pointer;
+  user-select: none;
 }
-.meta-item { margin-bottom: 0.5rem; }
+.folder-card:hover { background: #f8f9fa; }
+.folder-card.selected { background: #e8f0fe; border-color: #1a73e8; }
+.folder-card .icon { color: #5f6368; }
+.folder-card .name { font-weight: 500; font-size: 0.9rem; color: #3c4043; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Files */
+.files-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+.file-card {
+  border: 1px solid #dadce0; border-radius: 6px; cursor: pointer;
+  display: flex; flex-direction: column; overflow: hidden;
+  user-select: none;
+}
+.file-card:hover { background: #f8f9fa; }
+.file-card.selected { background: #e8f0fe; border-color: #1a73e8; }
+.thumbnail-wrapper { height: 140px; background: #f1f3f4; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #dadce0; }
+.thumbnail { width: 100%; height: 100%; object-fit: cover; }
+.file-icon { font-size: 3rem; }
+.file-info { padding: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
+.file-info .name { font-weight: 500; font-size: 0.9rem; color: #3c4043; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Right Sidebar */
+.right-sidebar {
+  width: 300px; border-left: 1px solid #dadce0; background: #fff;
+  display: flex; flex-direction: column;
+}
+.info-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; border-bottom: 1px solid #dadce0; }
+.info-header h3 { margin: 0; font-size: 1rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.close-btn { background: none; border: none; font-size: 1.2rem; cursor: pointer; color: #5f6368; }
+.info-content { padding: 1rem; overflow-y: auto; }
+.info-preview { margin-bottom: 1.5rem; border-radius: 8px; overflow: hidden; border: 1px solid #dadce0; background: #f1f3f4; height: 150px; display: flex; align-items: center; justify-content: center; }
+.info-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.meta-section { margin-bottom: 1.5rem; }
+.meta-section h4 { font-size: 0.9rem; margin: 0 0 0.5rem 0; color: #5f6368; }
+.meta-row { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 0.3rem 0; border-bottom: 1px solid #f1f3f4; }
+.meta-row span:first-child { color: #5f6368; }
+.meta-row span:last-child { color: #202124; font-weight: 500; text-align: right; max-width: 60%; word-break: break-all; }
+.actions { display: flex; flex-direction: column; gap: 0.5rem; }
+.btn { padding: 0.6rem; border-radius: 4px; border: 1px solid #dadce0; background: #fff; cursor: pointer; text-align: center; text-decoration: none; color: #3c4043; font-weight: 500; }
+.btn:hover { background: #f1f3f4; }
+.btn.primary { background: #1a73e8; color: #fff; border: none; }
+.btn.primary:hover { background: #1765cc; }
+
+/* Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 1000; }
+.modal-content { background: #fff; width: 90%; max-width: 1000px; height: 90vh; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; }
+.modal-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: #202124; color: #fff; }
+.modal-title { font-size: 1.1rem; font-weight: 500; }
+.modal-actions { display: flex; align-items: center; gap: 1rem; }
+.modal-actions .close-btn { color: #fff; }
+.modal-body { flex: 1; background: #f1f3f4; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 1rem; }
+.modal-body img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.modal-body iframe { width: 100%; height: 100%; border: none; }
+.no-preview { color: #5f6368; font-size: 1.2rem; }
 </style>
