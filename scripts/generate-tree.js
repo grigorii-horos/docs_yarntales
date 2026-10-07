@@ -41,7 +41,7 @@ function buildTree(dirPath, basePath = '/data') {
       const yaml = match[1];
       const fileLines = yaml.split('\n').filter(l => l.trim().startsWith('- '));
       if (fileLines.length > 0) {
-        allowedFiles = fileLines.map(l => l.replace(/^- /, '').replace(/["']/g, '').trim());
+        allowedFiles = fileLines.map(l => l.trim().replace(/^- /, '').replace(/["']/g, '').trim());
       }
       const titleMatch = yaml.match(/^title:\s*(.*)$/m);
       if (titleMatch) title = titleMatch[1].trim().replace(/^["']|["']$/g, '');
