@@ -3,7 +3,6 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Yarntales",
   
-  // Общие настройки
   themeConfig: {
     socialLinks: [
       { icon: 'github', link: 'https://github.com/grigorii-horos/yarntales' }
@@ -14,27 +13,32 @@ export default defineConfig({
     root: {
       label: 'Русский',
       lang: 'ru',
-      description: "Инструкции по использованию",
+      description: "Инструкции к продуктам Yarntales",
       themeConfig: {
         nav: [
           { text: 'Главная', link: '/' },
-          { text: 'Руководство', link: '/guide/' },
-          { text: 'Файлы', link: '/files/' }
+          { text: 'Наши продукты', items: [
+            { text: 'Волшебный ткацкий станок', link: '/products/loom/' },
+            { text: 'Прялка', link: '/products/spinner/' }
+          ]}
         ],
         sidebar: {
-          '/': [
+          '/products/': [
             {
-              text: 'Введение',
+              text: 'Волшебный ткацкий станок',
+              collapsed: false,
               items: [
-                { text: 'Начало работы', link: '/guide/' },
-                { text: 'Установка', link: '/guide/installation' }
+                { text: 'Обзор продукта', link: '/products/loom/' },
+                { text: 'Инструкция по сборке', link: '/products/loom/assembly' },
+                { text: 'Файлы и чертежи', link: '/products/loom/files' }
               ]
             },
             {
-              text: 'Файлы и превью',
+              text: 'Прялка',
+              collapsed: false,
               items: [
-                { text: 'Документы', link: '/files/' },
-                { text: 'Изображения', link: '/files/images' }
+                { text: 'Обзор продукта', link: '/products/spinner/' },
+                { text: 'Руководство пользователя', link: '/products/spinner/manual' }
               ]
             }
           ]
@@ -45,27 +49,32 @@ export default defineConfig({
       label: 'English',
       lang: 'en',
       link: '/en/',
-      description: "Usage instructions",
+      description: "Yarntales Product Manuals",
       themeConfig: {
         nav: [
           { text: 'Home', link: '/en/' },
-          { text: 'Guide', link: '/en/guide/' },
-          { text: 'Files', link: '/en/files/' }
+          { text: 'Our Products', items: [
+            { text: 'Magic Loom', link: '/en/products/loom/' },
+            { text: 'Thread Spinner', link: '/en/products/spinner/' }
+          ]}
         ],
         sidebar: {
-          '/en/': [
+          '/en/products/': [
             {
-              text: 'Introduction',
+              text: 'Magic Loom',
+              collapsed: false,
               items: [
-                { text: 'Getting Started', link: '/en/guide/' },
-                { text: 'Installation', link: '/en/guide/installation' }
+                { text: 'Product Overview', link: '/en/products/loom/' },
+                { text: 'Assembly Instructions', link: '/en/products/loom/assembly' },
+                { text: 'Files & Blueprints', link: '/en/products/loom/files' }
               ]
             },
             {
-              text: 'Files and Previews',
+              text: 'Thread Spinner',
+              collapsed: false,
               items: [
-                { text: 'Documents', link: '/en/files/' },
-                { text: 'Images', link: '/en/files/images' }
+                { text: 'Product Overview', link: '/en/products/spinner/' },
+                { text: 'User Manual', link: '/en/products/spinner/manual' }
               ]
             }
           ]
@@ -76,27 +85,32 @@ export default defineConfig({
       label: 'Română',
       lang: 'ro',
       link: '/ro/',
-      description: "Instrucțiuni de utilizare",
+      description: "Manuale pentru produsele Yarntales",
       themeConfig: {
         nav: [
           { text: 'Acasă', link: '/ro/' },
-          { text: 'Ghid', link: '/ro/guide/' },
-          { text: 'Fișiere', link: '/ro/files/' }
+          { text: 'Produsele noastre', items: [
+            { text: 'Război de țesut', link: '/ro/products/loom/' },
+            { text: 'Roată de tors', link: '/ro/products/spinner/' }
+          ]}
         ],
         sidebar: {
-          '/ro/': [
+          '/ro/products/': [
             {
-              text: 'Introducere',
+              text: 'Război de țesut magic',
+              collapsed: false,
               items: [
-                { text: 'Noțiuni de bază', link: '/ro/guide/' },
-                { text: 'Instalare', link: '/ro/guide/installation' }
+                { text: 'Prezentare generală', link: '/ro/products/loom/' },
+                { text: 'Instrucțiuni de asamblare', link: '/ro/products/loom/assembly' },
+                { text: 'Fișiere și Schițe', link: '/ro/products/loom/files' }
               ]
             },
             {
-              text: 'Fișiere și Previzualizări',
+              text: 'Roată de tors',
+              collapsed: false,
               items: [
-                { text: 'Documente', link: '/ro/files/' },
-                { text: 'Imagini', link: '/ro/files/images' }
+                { text: 'Prezentare generală', link: '/ro/products/spinner/' },
+                { text: 'Manual de utilizare', link: '/ro/products/spinner/manual' }
               ]
             }
           ]

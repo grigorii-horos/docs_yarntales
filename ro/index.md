@@ -2,22 +2,24 @@
 layout: home
 
 hero:
-  name: "Yarntales Docs"
-  text: "Instrucțiuni de Utilizare și Fișiere Publice"
-  tagline: "O structură demonstrativă care acceptă foldere, fișiere și previzualizări."
+  name: "Portal Manuale"
+  text: "Instrucțiuni oficiale pentru produsele dvs."
+  tagline: "Selectați un produs pentru a vizualiza ghiduri, etape de asamblare și pentru a descărca fișiere."
   actions:
     - theme: brand
-      text: Noțiuni de bază
-      link: /ro/guide/
+      text: Instrucțiuni Război de țesut
+      link: /ro/products/loom/
     - theme: alt
-      text: Vizualizare fișiere
-      link: /ro/files/
+      text: Instrucțiuni Roată de tors
+      link: /ro/products/spinner/
 
 features:
-  - title: Foldere și Navigare
-    details: Organizați-vă cu ușurință instrucțiunile în secțiuni și foldere.
-  - title: Fișiere Publice
-    details: Încărcați fișiere PDF, documente și alte fișiere pentru descărcare.
-  - title: Previzualizări
-    details: Suport încorporat pentru imagini, Markdown și documente direct în browser.
+  - title: Război de țesut magic
+    details: Ghid complet pentru asamblarea, reglarea și utilizarea războiului de țesut.
+    link: /ro/products/loom/
+  - title: Roată de tors
+    details: Cum să pregătiți corect roata de tors și să începeți lucrul.
+    link: /ro/products/spinner/
+  - title: Schițe și Fișiere
+    details: Descărcați manuale PDF și schițe direct de pe paginile produselor.
 ---

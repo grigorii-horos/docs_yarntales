@@ -2,22 +2,24 @@
 layout: home
 
 hero:
-  name: "Yarntales Docs"
-  text: "Usage Instructions and Public Files"
-  tagline: "A demo structure supporting folders, files, and previews."
+  name: "Product Manuals"
+  text: "Official instructions for your products"
+  tagline: "Select a product to view guides, assembly steps, and download files."
   actions:
     - theme: brand
-      text: Getting Started
-      link: /en/guide/
+      text: Loom Instructions
+      link: /en/products/loom/
     - theme: alt
-      text: View Files
-      link: /en/files/
+      text: Spinner Instructions
+      link: /en/products/spinner/
 
 features:
-  - title: Folders & Navigation
-    details: Easily organize your instructions into sections and folders.
-  - title: Public Files
-    details: Upload PDFs, documents, and other files for download.
-  - title: Previews
-    details: Built-in support for images, Markdown, and embedded documents right in the browser.
+  - title: Magic Loom
+    details: Complete guide for assembling, tuning, and using the loom.
+    link: /en/products/loom/
+  - title: Thread Spinner
+    details: How to properly set up the spinner and start your work.
+    link: /en/products/spinner/
+  - title: Blueprints & Files
+    details: Download PDF manuals and schematics directly from product pages.
 ---
