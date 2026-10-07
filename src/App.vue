@@ -106,8 +106,11 @@ function syncFromHash() {
   const hash = window.location.hash.slice(1);
   if (hash) {
     const [pathPart, queryPart] = hash.split('?');
-    if (pathPart && pathPart !== currentPath.value) {
-      currentPath.value = pathPart;
+    if (pathPart) {
+      const decodedPath = decodeURIComponent(pathPart);
+      if (decodedPath !== currentPath.value) {
+        currentPath.value = decodedPath;
+      }
     }
     if (queryPart) {
       const params = new URLSearchParams(queryPart);
@@ -138,7 +141,7 @@ onMounted(async () => {
 // Update URL when state changes
 watch([currentPath, currentLang], ([newPath, newLang]) => {
   const newHash = `${newPath}?lang=${newLang}`;
-  if (window.location.hash !== '#' + newHash) {
+  if (decodeURIComponent(window.location.hash) !== '#' + newHash) {
     window.location.hash = newHash;
   }
 })
