@@ -1,0 +1,48 @@
+[
+  {
+    "name": "archive",
+    "path": "/data/archive",
+    "type": "directory",
+    "size": 52,
+    "updatedAt": "2026-10-07T18:25:50.720Z",
+    "children": [
+      {
+        "name": "data.txt",
+        "path": "/data/archive/data.txt",
+        "type": "file",
+        "size": 4,
+        "updatedAt": "2026-10-07T18:25:46.544Z",
+        "meta": {
+          "title": "Сырые данные",
+          "description": "Текстовый файл с некоторыми данными."
+        }
+      }
+    ]
+  },
+  {
+    "name": "demo-image.jpg",
+    "path": "/data/demo-image.jpg",
+    "type": "file",
+    "size": 54365,
+    "updatedAt": "2026-10-07T18:25:38.408Z",
+    "meta": {
+      "title": "Обзорное фото",
+      "description": "Фотография продукта в высоком разрешении.",
+      "camera": "Sony A7III",
+      "tags": "photo, product, demo"
+    }
+  },
+  {
+    "name": "sample.pdf",
+    "path": "/data/sample.pdf",
+    "type": "file",
+    "size": 13264,
+    "updatedAt": "2026-10-07T18:25:38.098Z",
+    "meta": {
+      "title": "Инструкция PDF",
+      "description": "Это подробная инструкция в формате PDF.",
+      "author": "Yarntales Team",
+      "version": "1.0.0"
+    }
+  }
+]
