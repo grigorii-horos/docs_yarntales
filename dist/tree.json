@@ -31,51 +31,205 @@
           "allowedFiles": null
         }
       },
-      "children": [],
-      "files": [
+      "children": [
         {
-          "name": "Авоська з пайетками.pdf",
-          "path": "/data/Bags/Авоська з пайетками.pdf",
-          "size": 1390641,
-          "preview": "/data/Bags/Авоська з пайетками.pdf.preview.jpg"
+          "name": "Авоська з пайетками",
+          "path": "/data/Bags/Авоська з пайетками",
+          "type": "item",
+          "content": {
+            "en": {
+              "text": "# Авоська з пайетками\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Авоська з пайетками.pdf"
+              ]
+            },
+            "ru": {
+              "text": "# Авоська з пайетками\n\nИнструкция по уходу:\n",
+              "allowedFiles": [
+                "- Авоська з пайетками.pdf"
+              ]
+            }
+          },
+          "children": [],
+          "files": [
+            {
+              "name": "Авоська з пайетками.pdf",
+              "path": "/data/Bags/Авоська з пайетками/Авоська з пайетками.pdf",
+              "size": 1390641,
+              "preview": "/data/Bags/Авоська з пайетками/Авоська з пайетками.pdf.preview.jpg"
+            }
+          ]
         },
         {
-          "name": "Ажурный шоппер Bloom.pdf",
-          "path": "/data/Bags/Ажурный шоппер Bloom.pdf",
-          "size": 1144510,
-          "preview": "/data/Bags/Ажурный шоппер Bloom.pdf.preview.jpg"
+          "name": "Ажурный шоппер Bloom",
+          "path": "/data/Bags/Ажурный шоппер Bloom",
+          "type": "item",
+          "content": {
+            "en": {
+              "text": "# Ажурный шоппер Bloom\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Ажурный шоппер Bloom.pdf"
+              ]
+            },
+            "ru": {
+              "text": "# Ажурный шоппер Bloom\n\nИнструкция по уходу:\n",
+              "allowedFiles": [
+                "- Ажурный шоппер Bloom.pdf"
+              ]
+            }
+          },
+          "children": [],
+          "files": [
+            {
+              "name": "Ажурный шоппер Bloom.pdf",
+              "path": "/data/Bags/Ажурный шоппер Bloom/Ажурный шоппер Bloom.pdf",
+              "size": 1144510,
+              "preview": "/data/Bags/Ажурный шоппер Bloom/Ажурный шоппер Bloom.pdf.preview.jpg"
+            }
+          ]
         },
         {
-          "name": "Повседневная сумка-тоут XL.pdf",
-          "path": "/data/Bags/Повседневная сумка-тоут XL.pdf",
-          "size": 1587860,
-          "preview": "/data/Bags/Повседневная сумка-тоут XL.pdf.preview.jpg"
+          "name": "Повседневная сумка-тоут XL",
+          "path": "/data/Bags/Повседневная сумка-тоут XL",
+          "type": "item",
+          "content": {
+            "en": {
+              "text": "# Повседневная сумка-тоут XL\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Повседневная сумка-тоут XL.pdf"
+              ]
+            },
+            "ru": {
+              "text": "# Повседневная сумка-тоут XL\n\nИнструкция по уходу:\n",
+              "allowedFiles": [
+                "- Повседневная сумка-тоут XL.pdf"
+              ]
+            }
+          },
+          "children": [],
+          "files": [
+            {
+              "name": "Повседневная сумка-тоут XL.pdf",
+              "path": "/data/Bags/Повседневная сумка-тоут XL/Повседневная сумка-тоут XL.pdf",
+              "size": 1587860,
+              "preview": "/data/Bags/Повседневная сумка-тоут XL/Повседневная сумка-тоут XL.pdf.preview.jpg"
+            }
+          ]
         },
         {
-          "name": "Структурная сумка для ноутбука.pdf",
-          "path": "/data/Bags/Структурная сумка для ноутбука.pdf",
-          "size": 1498141,
-          "preview": "/data/Bags/Структурная сумка для ноутбука.pdf.preview.jpg"
+          "name": "Структурная сумка для ноутбука",
+          "path": "/data/Bags/Структурная сумка для ноутбука",
+          "type": "item",
+          "content": {
+            "en": {
+              "text": "# Структурная сумка для ноутбука\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Структурная сумка для ноутбука.pdf"
+              ]
+            },
+            "ru": {
+              "text": "# Структурная сумка для ноутбука\n\nИнструкция по уходу:\n",
+              "allowedFiles": [
+                "- Структурная сумка для ноутбука.pdf"
+              ]
+            }
+          },
+          "children": [],
+          "files": [
+            {
+              "name": "Структурная сумка для ноутбука.pdf",
+              "path": "/data/Bags/Структурная сумка для ноутбука/Структурная сумка для ноутбука.pdf",
+              "size": 1498141,
+              "preview": "/data/Bags/Структурная сумка для ноутбука/Структурная сумка для ноутбука.pdf.preview.jpg"
+            }
+          ]
         },
         {
-          "name": "Сумка Роза.pdf",
-          "path": "/data/Bags/Сумка Роза.pdf",
-          "size": 1055131,
-          "preview": "/data/Bags/Сумка Роза.pdf.preview.jpg"
+          "name": "Сумка Роза",
+          "path": "/data/Bags/Сумка Роза",
+          "type": "item",
+          "content": {
+            "en": {
+              "text": "# Сумка Роза\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Сумка Роза.pdf"
+              ]
+            },
+            "ru": {
+              "text": "# Сумка Роза\n\nИнструкция по уходу:\n",
+              "allowedFiles": [
+                "- Сумка Роза.pdf"
+              ]
+            }
+          },
+          "children": [],
+          "files": [
+            {
+              "name": "Сумка Роза.pdf",
+              "path": "/data/Bags/Сумка Роза/Сумка Роза.pdf",
+              "size": 1055131,
+              "preview": "/data/Bags/Сумка Роза/Сумка Роза.pdf.preview.jpg"
+            }
+          ]
         },
         {
-          "name": "Сумка Сильвия.pdf",
-          "path": "/data/Bags/Сумка Сильвия.pdf",
-          "size": 1381801,
-          "preview": "/data/Bags/Сумка Сильвия.pdf.preview.jpg"
+          "name": "Сумка Сильвия",
+          "path": "/data/Bags/Сумка Сильвия",
+          "type": "item",
+          "content": {
+            "en": {
+              "text": "# Сумка Сильвия\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Сумка Сильвия.pdf"
+              ]
+            },
+            "ru": {
+              "text": "# Сумка Сильвия\n\nИнструкция по уходу:\n",
+              "allowedFiles": [
+                "- Сумка Сильвия.pdf"
+              ]
+            }
+          },
+          "children": [],
+          "files": [
+            {
+              "name": "Сумка Сильвия.pdf",
+              "path": "/data/Bags/Сумка Сильвия/Сумка Сильвия.pdf",
+              "size": 1381801,
+              "preview": "/data/Bags/Сумка Сильвия/Сумка Сильвия.pdf.preview.jpg"
+            }
+          ]
         },
         {
-          "name": "Сумка-бананка.pdf",
-          "path": "/data/Bags/Сумка-бананка.pdf",
-          "size": 1105441,
-          "preview": "/data/Bags/Сумка-бананка.pdf.preview.jpg"
+          "name": "Сумка-бананка",
+          "path": "/data/Bags/Сумка-бананка",
+          "type": "item",
+          "content": {
+            "en": {
+              "text": "# Сумка-бананка\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Сумка-бананка.pdf"
+              ]
+            },
+            "ru": {
+              "text": "# Сумка-бананка\n\nИнструкция по уходу:\n",
+              "allowedFiles": [
+                "- Сумка-бананка.pdf"
+              ]
+            }
+          },
+          "children": [],
+          "files": [
+            {
+              "name": "Сумка-бананка.pdf",
+              "path": "/data/Bags/Сумка-бананка/Сумка-бананка.pdf",
+              "size": 1105441,
+              "preview": "/data/Bags/Сумка-бананка/Сумка-бананка.pdf.preview.jpg"
+            }
+          ]
         }
-      ]
+      ],
+      "files": []
     }
   ],
   "files": []
