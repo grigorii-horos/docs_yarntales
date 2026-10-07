@@ -2,9 +2,18 @@
   <div class="portal-app">
     <!-- Header -->
     <header class="header">
-      <div class="logo" @click="navigate('/data')" style="cursor: pointer;">
-        <span class="icon-logo">🧶</span>
-        <span>Yarntales Instructions</span>
+      <div class="logo-wrapper">
+        <button class="hamburger" @click="toggleSidebar">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+        <div class="logo" @click="navigate('/data')" style="cursor: pointer;">
+          <span class="icon-logo">🧶</span>
+          <span class="site-title">Yarntales Instructions</span>
+        </div>
       </div>
       <div class="header-actions">
         <select v-model="currentLang" class="lang-select">
@@ -16,8 +25,11 @@
     </header>
 
     <div class="main-layout">
+      <!-- Sidebar Overlay for mobile -->
+      <div class="overlay" v-if="isSidebarOpen" @click="toggleSidebar"></div>
+
       <!-- Sidebar -->
-      <aside class="sidebar">
+      <aside class="sidebar" :class="{ open: isSidebarOpen }">
         <div class="nav-tree" v-if="tree">
           <tree-node 
             v-for="child in tree.children"
@@ -101,6 +113,11 @@ import TreeNode from './components/TreeNode.vue'
 const tree = ref(null)
 const currentPath = ref('/data')
 const currentLang = ref('ru')
+const isSidebarOpen = ref(false)
+
+function toggleSidebar() {
+  isSidebarOpen.value = !isSidebarOpen.value
+}
 
 function syncFromHash() {
   const hash = window.location.hash.slice(1);
@@ -195,6 +212,7 @@ const filteredFiles = computed(() => {
 
 function navigate(path) {
   currentPath.value = path
+  isSidebarOpen.value = false // close sidebar on mobile after navigation
 }
 
 function formatBytes(bytes) {
@@ -250,9 +268,20 @@ function getChildIcon(child) {
   background: #fff;
   border-bottom: 1px solid #eaeaea;
   box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  z-index: 10;
+  z-index: 60; /* above overlay */
 }
+.logo-wrapper { display: flex; align-items: center; gap: 1rem; }
 .logo { font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
 .header-actions { display: flex; align-items: center; gap: 1rem; }
 .lang-select {
   padding: 0.5rem;
@@ -263,7 +292,7 @@ function getChildIcon(child) {
   cursor: pointer;
 }
 
-.main-layout { display: flex; flex: 1; overflow: hidden; }
+.main-layout { display: flex; flex: 1; overflow: hidden; position: relative; }
 
 .sidebar {
   width: 280px;
@@ -271,6 +300,19 @@ function getChildIcon(child) {
   border-right: 1px solid #eaeaea;
   padding: 1.5rem 1rem;
   overflow-y: auto;
+  z-index: 50;
+  transition: transform 0.3s ease;
+}
+
+.overlay {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 40;
 }
 
 .content-area {
@@ -363,4 +405,56 @@ function getChildIcon(child) {
 .file-info .size { font-size: 0.85rem; color: #888; }
 
 .empty { color: #888; font-style: italic; margin-top: 2rem; }
+
+/* Responsive adjustments */
+@media (min-width: 769px) {
+  .hamburger { display: none !important; }
+  .sidebar { transform: none !important; }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0.8rem 1rem;
+  }
+  .hamburger {
+    display: flex;
+  }
+  .site-title {
+    display: none; /* Hide title on mobile to save space */
+  }
+  
+  .sidebar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 15px rgba(0,0,0,0.1);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .overlay {
+    display: block;
+  }
+  
+  .scroll-area {
+    padding: 1rem;
+  }
+  
+  .markdown-body {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+  
+  :deep(.markdown-body h1) {
+    font-size: 1.5rem;
+  }
+  
+  .grid {
+    grid-template-columns: 1fr; /* Stack cards vertically on mobile */
+    gap: 1rem;
+  }
+}
 </style>
