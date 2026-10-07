@@ -2,7 +2,7 @@
   <div class="portal-app">
     <!-- Header -->
     <header class="header">
-      <div class="logo">
+      <div class="logo" @click="navigate('/data')" style="cursor: pointer;">
         <span class="icon-logo">🧶</span>
         <span>Yarntales Instructions</span>
       </div>
@@ -21,9 +21,11 @@
     <div class="main-layout">
       <!-- Sidebar -->
       <aside class="sidebar">
-        <div class="nav-tree">
+        <div class="nav-tree" v-if="tree">
           <tree-node 
-            :node="tree" 
+            v-for="child in tree.children"
+            :key="child.path"
+            :node="child" 
             :currentPath="currentPath"
             @navigate="navigate"
           />
