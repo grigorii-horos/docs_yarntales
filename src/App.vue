@@ -94,7 +94,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watch } from 'vue'
 import { marked } from 'marked'
 import TreeNode from './components/TreeNode.vue'
 
@@ -102,12 +102,44 @@ const tree = ref(null)
 const currentPath = ref('/data')
 const currentLang = ref('ru')
 
+function syncFromHash() {
+  const hash = window.location.hash.slice(1);
+  if (hash) {
+    const [pathPart, queryPart] = hash.split('?');
+    if (pathPart && pathPart !== currentPath.value) {
+      currentPath.value = pathPart;
+    }
+    if (queryPart) {
+      const params = new URLSearchParams(queryPart);
+      if (params.has('lang') && params.get('lang') !== currentLang.value) {
+        currentLang.value = params.get('lang');
+      }
+    }
+  }
+}
+
 onMounted(async () => {
   try {
     const res = await fetch('/tree.json')
     tree.value = await res.json()
   } catch (e) {
     console.error('Failed to load tree', e)
+  }
+
+  // Initial sync
+  syncFromHash();
+
+  // Listen to browser back/forward
+  window.addEventListener('hashchange', () => {
+    syncFromHash();
+  });
+})
+
+// Update URL when state changes
+watch([currentPath, currentLang], ([newPath, newLang]) => {
+  const newHash = `${newPath}?lang=${newLang}`;
+  if (window.location.hash !== '#' + newHash) {
+    window.location.hash = newHash;
   }
 })
 
