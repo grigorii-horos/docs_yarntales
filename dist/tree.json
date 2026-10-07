@@ -20,19 +20,15 @@
     {
       "name": "Bags",
       "path": "/data/Bags",
-      "type": "item",
+      "type": "folder",
       "content": {
         "en": {
-          "text": "# Care Instructions (Silvia Bag)\nHere we show only one file for the English version.\n",
-          "allowedFiles": [
-            "- Сумка Сильвия.pdf"
-          ]
+          "text": "# Bag Care Instructions\nHere you can find all care instructions for our bags.\n",
+          "allowedFiles": null
         },
         "ru": {
-          "text": "# Инструкции по уходу (Сумка Роза)\nЗдесь мы показываем только один файл для русской версии.\n",
-          "allowedFiles": [
-            "- Сумка Роза.pdf"
-          ]
+          "text": "# Инструкции к сумкам\nЗдесь собраны все инструкции по уходу за нашими сумками. Выберите нужную ниже:\n",
+          "allowedFiles": null
         }
       },
       "children": [],
