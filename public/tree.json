@@ -76,64 +76,6 @@
           "preview": "/data/Bags/Сумка-бананка.pdf.preview.jpg"
         }
       ]
-    },
-    {
-      "name": "Product A",
-      "path": "/data/Product A",
-      "type": "folder",
-      "content": {
-        "default": {
-          "text": "# Product A: Magic Loom\nThis is the main category for the Magic Loom. Below you can find its instructions and files.\n",
-          "allowedFiles": null
-        }
-      },
-      "children": [
-        {
-          "name": "Assembly Guide",
-          "path": "/data/Product A/Assembly Guide",
-          "type": "item",
-          "content": {
-            "default": {
-              "text": "# How to Assemble the Magic Loom\n1. Open the box.\n2. Put the pieces together.\n3. You are done!\n\nEnjoy weaving.\n",
-              "allowedFiles": null
-            }
-          },
-          "children": [],
-          "files": [
-            {
-              "name": "blueprint.pdf",
-              "path": "/data/Product A/Assembly Guide/blueprint.pdf",
-              "size": 13264,
-              "meta": {
-                "title": "Официальный чертеж (PDF)"
-              },
-              "preview": "/data/Product A/Assembly Guide/blueprint.pdf.preview.jpg"
-            }
-          ]
-        }
-      ],
-      "files": []
-    },
-    {
-      "name": "Product B",
-      "path": "/data/Product B",
-      "type": "item",
-      "content": {
-        "default": {
-          "text": "# Product B: Thread Spinner\nThis product has no subfolders, just a single instruction page!\n\n## Usage\nSpin it really fast.\n",
-          "allowedFiles": null
-        },
-        "ro": {
-          "text": "# Produs B: Roată de tors\nInstrucțiuni în limba română.\n",
-          "allowedFiles": null
-        },
-        "ru": {
-          "text": "# Продукт B: Прялка\nИнструкция на русском языке.\n",
-          "allowedFiles": null
-        }
-      },
-      "children": [],
-      "files": []
     }
   ],
   "files": []
