@@ -26,6 +26,10 @@
           "text": "# Bag Care Instructions\nHere you can find all care instructions for our bags.\n",
           "allowedFiles": null
         },
+        "ro": {
+          "text": "# Instrucțiuni pentru genți\nAici găsiți toate instrucțiunile de îngrijire pentru gențile noastre. Alegeți una de mai jos:\n",
+          "allowedFiles": null
+        },
         "ru": {
           "text": "# Инструкции к сумкам\nЗдесь собраны все инструкции по уходу за нашими сумками. Выберите нужную ниже:\n",
           "allowedFiles": null
@@ -39,6 +43,12 @@
           "content": {
             "en": {
               "text": "# Авоська з пайетками\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Авоська з пайетками.pdf"
+              ]
+            },
+            "ro": {
+              "text": "# Авоська з пайетками\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Авоська з пайетками.pdf"
               ]
@@ -71,6 +81,12 @@
                 "- Ажурный шоппер Bloom.pdf"
               ]
             },
+            "ro": {
+              "text": "# Ажурный шоппер Bloom\n\nInstrucțiuni de îngrijire:\n",
+              "allowedFiles": [
+                "- Ажурный шоппер Bloom.pdf"
+              ]
+            },
             "ru": {
               "text": "# Ажурный шоппер Bloom\n\nИнструкция по уходу:\n",
               "allowedFiles": [
@@ -95,6 +111,12 @@
           "content": {
             "en": {
               "text": "# Повседневная сумка-тоут XL\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Повседневная сумка-тоут XL.pdf"
+              ]
+            },
+            "ro": {
+              "text": "# Повседневная сумка-тоут XL\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Повседневная сумка-тоут XL.pdf"
               ]
@@ -127,6 +149,12 @@
                 "- Структурная сумка для ноутбука.pdf"
               ]
             },
+            "ro": {
+              "text": "# Структурная сумка для ноутбука\n\nInstrucțiuni de îngrijire:\n",
+              "allowedFiles": [
+                "- Структурная сумка для ноутбука.pdf"
+              ]
+            },
             "ru": {
               "text": "# Структурная сумка для ноутбука\n\nИнструкция по уходу:\n",
               "allowedFiles": [
@@ -151,6 +179,12 @@
           "content": {
             "en": {
               "text": "# Сумка Роза\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Сумка Роза.pdf"
+              ]
+            },
+            "ro": {
+              "text": "# Сумка Роза\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Сумка Роза.pdf"
               ]
@@ -183,6 +217,12 @@
                 "- Сумка Сильвия.pdf"
               ]
             },
+            "ro": {
+              "text": "# Сумка Сильвия\n\nInstrucțiuni de îngrijire:\n",
+              "allowedFiles": [
+                "- Сумка Сильвия.pdf"
+              ]
+            },
             "ru": {
               "text": "# Сумка Сильвия\n\nИнструкция по уходу:\n",
               "allowedFiles": [
@@ -207,6 +247,12 @@
           "content": {
             "en": {
               "text": "# Сумка-бананка\n\nCare instructions:\n",
+              "allowedFiles": [
+                "- Сумка-бананка.pdf"
+              ]
+            },
+            "ro": {
+              "text": "# Сумка-бананка\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Сумка-бананка.pdf"
               ]
