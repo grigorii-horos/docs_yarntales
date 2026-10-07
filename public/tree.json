@@ -5,15 +5,24 @@
   "content": {
     "en": {
       "text": "# Yarntales Documentation\nWelcome! Please select a product below.\n",
-      "allowedFiles": null
+      "allowedFiles": null,
+      "title": null,
+      "preview": null,
+      "icon": null
     },
     "default": {
       "text": "# Yarntales Documentation\nWelcome to the root directory! Please select a product below.\n",
-      "allowedFiles": null
+      "allowedFiles": null,
+      "title": null,
+      "preview": null,
+      "icon": null
     },
     "ru": {
       "text": "# Документация Yarntales\nДобро пожаловать! Выберите продукт ниже.\n",
-      "allowedFiles": null
+      "allowedFiles": null,
+      "title": null,
+      "preview": null,
+      "icon": null
     }
   },
   "children": [
@@ -24,15 +33,24 @@
       "content": {
         "en": {
           "text": "# Bag Care Instructions\nHere you can find all care instructions for our bags.\n",
-          "allowedFiles": null
+          "allowedFiles": null,
+          "title": null,
+          "preview": null,
+          "icon": null
         },
         "ro": {
           "text": "# Instrucțiuni pentru genți\nAici găsiți toate instrucțiunile de îngrijire pentru gențile noastre. Alegeți una de mai jos:\n",
-          "allowedFiles": null
+          "allowedFiles": null,
+          "title": null,
+          "preview": null,
+          "icon": null
         },
         "ru": {
           "text": "# Инструкции к сумкам\nЗдесь собраны все инструкции по уходу за нашими сумками. Выберите нужную ниже:\n",
-          "allowedFiles": null
+          "allowedFiles": null,
+          "title": null,
+          "preview": null,
+          "icon": null
         }
       },
       "children": [
@@ -45,19 +63,28 @@
               "text": "# Авоська з пайетками\n\nCare instructions:\n",
               "allowedFiles": [
                 "- Авоська з пайетками.pdf"
-              ]
+              ],
+              "title": "Авоська з пайетками (EN)",
+              "preview": "Авоська з пайетками.pdf.preview.jpg",
+              "icon": null
             },
             "ro": {
               "text": "# Авоська з пайетками\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Авоська з пайетками.pdf"
-              ]
+              ],
+              "title": "Авоська з пайетками (RO)",
+              "preview": "Авоська з пайетками.pdf.preview.jpg",
+              "icon": null
             },
             "ru": {
               "text": "# Авоська з пайетками\n\nИнструкция по уходу:\n",
               "allowedFiles": [
                 "- Авоська з пайетками.pdf"
-              ]
+              ],
+              "title": "Авоська з пайетками",
+              "preview": "Авоська з пайетками.pdf.preview.jpg",
+              "icon": null
             }
           },
           "children": [],
@@ -79,19 +106,28 @@
               "text": "# Ажурный шоппер Bloom\n\nCare instructions:\n",
               "allowedFiles": [
                 "- Ажурный шоппер Bloom.pdf"
-              ]
+              ],
+              "title": "Ажурный шоппер Bloom (EN)",
+              "preview": "Ажурный шоппер Bloom.pdf.preview.jpg",
+              "icon": null
             },
             "ro": {
               "text": "# Ажурный шоппер Bloom\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Ажурный шоппер Bloom.pdf"
-              ]
+              ],
+              "title": "Ажурный шоппер Bloom (RO)",
+              "preview": "Ажурный шоппер Bloom.pdf.preview.jpg",
+              "icon": null
             },
             "ru": {
               "text": "# Ажурный шоппер Bloom\n\nИнструкция по уходу:\n",
               "allowedFiles": [
                 "- Ажурный шоппер Bloom.pdf"
-              ]
+              ],
+              "title": "Ажурный шоппер Bloom",
+              "preview": "Ажурный шоппер Bloom.pdf.preview.jpg",
+              "icon": null
             }
           },
           "children": [],
@@ -113,19 +149,28 @@
               "text": "# Повседневная сумка-тоут XL\n\nCare instructions:\n",
               "allowedFiles": [
                 "- Повседневная сумка-тоут XL.pdf"
-              ]
+              ],
+              "title": "Повседневная сумка-тоут XL (EN)",
+              "preview": "Повседневная сумка-тоут XL.pdf.preview.jpg",
+              "icon": null
             },
             "ro": {
               "text": "# Повседневная сумка-тоут XL\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Повседневная сумка-тоут XL.pdf"
-              ]
+              ],
+              "title": "Повседневная сумка-тоут XL (RO)",
+              "preview": "Повседневная сумка-тоут XL.pdf.preview.jpg",
+              "icon": null
             },
             "ru": {
               "text": "# Повседневная сумка-тоут XL\n\nИнструкция по уходу:\n",
               "allowedFiles": [
                 "- Повседневная сумка-тоут XL.pdf"
-              ]
+              ],
+              "title": "Повседневная сумка-тоут XL",
+              "preview": "Повседневная сумка-тоут XL.pdf.preview.jpg",
+              "icon": null
             }
           },
           "children": [],
@@ -147,19 +192,28 @@
               "text": "# Структурная сумка для ноутбука\n\nCare instructions:\n",
               "allowedFiles": [
                 "- Структурная сумка для ноутбука.pdf"
-              ]
+              ],
+              "title": "Структурная сумка для ноутбука (EN)",
+              "preview": "Структурная сумка для ноутбука.pdf.preview.jpg",
+              "icon": null
             },
             "ro": {
               "text": "# Структурная сумка для ноутбука\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Структурная сумка для ноутбука.pdf"
-              ]
+              ],
+              "title": "Структурная сумка для ноутбука (RO)",
+              "preview": "Структурная сумка для ноутбука.pdf.preview.jpg",
+              "icon": null
             },
             "ru": {
               "text": "# Структурная сумка для ноутбука\n\nИнструкция по уходу:\n",
               "allowedFiles": [
                 "- Структурная сумка для ноутбука.pdf"
-              ]
+              ],
+              "title": "Структурная сумка для ноутбука",
+              "preview": "Структурная сумка для ноутбука.pdf.preview.jpg",
+              "icon": null
             }
           },
           "children": [],
@@ -181,19 +235,28 @@
               "text": "# Сумка Роза\n\nCare instructions:\n",
               "allowedFiles": [
                 "- Сумка Роза.pdf"
-              ]
+              ],
+              "title": "Сумка Роза (EN)",
+              "preview": "Сумка Роза.pdf.preview.jpg",
+              "icon": null
             },
             "ro": {
               "text": "# Сумка Роза\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Сумка Роза.pdf"
-              ]
+              ],
+              "title": "Сумка Роза (RO)",
+              "preview": "Сумка Роза.pdf.preview.jpg",
+              "icon": null
             },
             "ru": {
               "text": "# Сумка Роза\n\nИнструкция по уходу:\n",
               "allowedFiles": [
                 "- Сумка Роза.pdf"
-              ]
+              ],
+              "title": "Сумка Роза",
+              "preview": "Сумка Роза.pdf.preview.jpg",
+              "icon": null
             }
           },
           "children": [],
@@ -215,19 +278,28 @@
               "text": "# Сумка Сильвия\n\nCare instructions:\n",
               "allowedFiles": [
                 "- Сумка Сильвия.pdf"
-              ]
+              ],
+              "title": "Сумка Сильвия (EN)",
+              "preview": "Сумка Сильвия.pdf.preview.jpg",
+              "icon": null
             },
             "ro": {
               "text": "# Сумка Сильвия\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Сумка Сильвия.pdf"
-              ]
+              ],
+              "title": "Сумка Сильвия (RO)",
+              "preview": "Сумка Сильвия.pdf.preview.jpg",
+              "icon": null
             },
             "ru": {
               "text": "# Сумка Сильвия\n\nИнструкция по уходу:\n",
               "allowedFiles": [
                 "- Сумка Сильвия.pdf"
-              ]
+              ],
+              "title": "Сумка Сильвия",
+              "preview": "Сумка Сильвия.pdf.preview.jpg",
+              "icon": null
             }
           },
           "children": [],
@@ -249,19 +321,28 @@
               "text": "# Сумка-бананка\n\nCare instructions:\n",
               "allowedFiles": [
                 "- Сумка-бананка.pdf"
-              ]
+              ],
+              "title": "Сумка-бананка (EN)",
+              "preview": "Сумка-бананка.pdf.preview.jpg",
+              "icon": null
             },
             "ro": {
               "text": "# Сумка-бананка\n\nInstrucțiuni de îngrijire:\n",
               "allowedFiles": [
                 "- Сумка-бананка.pdf"
-              ]
+              ],
+              "title": "Сумка-бананка (RO)",
+              "preview": "Сумка-бананка.pdf.preview.jpg",
+              "icon": null
             },
             "ru": {
               "text": "# Сумка-бананка\n\nИнструкция по уходу:\n",
               "allowedFiles": [
                 "- Сумка-бананка.pdf"
-              ]
+              ],
+              "title": "Сумка-бананка",
+              "preview": "Сумка-бананка.pdf.preview.jpg",
+              "icon": null
             }
           },
           "children": [],

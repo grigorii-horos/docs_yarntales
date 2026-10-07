@@ -1,4 +1,6 @@
 ---
+title: "Ажурный шоппер Bloom"
+preview: "Ажурный шоппер Bloom.pdf.preview.jpg"
 files:
   - "Ажурный шоппер Bloom.pdf"
 ---

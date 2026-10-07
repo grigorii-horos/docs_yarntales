@@ -1,4 +1,6 @@
 ---
+title: "Сумка-бананка"
+preview: "Сумка-бананка.pdf.preview.jpg"
 files:
   - "Сумка-бананка.pdf"
 ---

@@ -27,6 +27,7 @@
             :key="child.path"
             :node="child" 
             :currentPath="currentPath"
+            :currentLang="currentLang"
             @navigate="navigate"
           />
         </div>
@@ -56,9 +57,13 @@
                 :key="child.path"
                 @click="navigate(child.path)"
               >
-                <div class="icon">{{ child.type === 'item' ? '📖' : '📁' }}</div>
+                <div class="item-card-image" v-if="getChildPreview(child)">
+                  <img :src="getChildPreview(child)" class="preview-img" />
+                </div>
+                <div class="icon" v-else>{{ getChildIcon(child) }}</div>
+                
                 <div class="details">
-                  <div class="name">{{ child.name }}</div>
+                  <div class="name">{{ getChildName(child) }}</div>
                   <div class="type">{{ child.type === 'item' ? 'Instruction' : 'Folder' }}</div>
                 </div>
               </div>
@@ -149,7 +154,10 @@ const filteredChildren = computed(() => {
   if (!currentNode.value || !currentNode.value.children) return [];
   if (!searchQuery.value) return currentNode.value.children;
   const q = searchQuery.value.toLowerCase();
-  return currentNode.value.children.filter(c => c.name.toLowerCase().includes(q));
+  return currentNode.value.children.filter(c => {
+    const name = getChildName(c).toLowerCase();
+    return name.includes(q) || c.name.toLowerCase().includes(q);
+  });
 })
 
 const filteredFiles = computed(() => {
@@ -175,9 +183,20 @@ const breadcrumbs = computed(() => {
   const parts = currentPath.value.replace('/data', '').split('/').filter(Boolean)
   let acc = '/data'
   const crumbs = [{ name: 'Home', path: '/data' }]
+  let currentSearchNode = tree.value;
+
   parts.forEach(p => {
     acc += '/' + p
-    crumbs.push({ name: p, path: acc })
+    // Find node to get its localized title if available
+    let nodeName = p;
+    if (currentSearchNode && currentSearchNode.children) {
+      const child = currentSearchNode.children.find(c => c.name === p);
+      if (child) {
+        nodeName = getChildName(child);
+        currentSearchNode = child;
+      }
+    }
+    crumbs.push({ name: nodeName, path: acc })
   })
   return crumbs
 })
@@ -193,6 +212,32 @@ function formatBytes(bytes) {
   const sizes = ['B', 'KB', 'MB', 'GB']
   const i = Math.floor(Math.log(bytes) / Math.log(k))
   return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
+}
+
+// Helpers to get language-aware properties for children
+function getChildContent(child) {
+  if (!child || !child.content) return null;
+  return child.content[currentLang.value] || child.content['default'] || Object.values(child.content)[0];
+}
+
+function getChildName(child) {
+  const content = getChildContent(child);
+  return (content && content.title) ? content.title : child.name;
+}
+
+function getChildPreview(child) {
+  const content = getChildContent(child);
+  if (content && content.preview) {
+    // Return relative path to preview
+    return child.path + '/' + content.preview;
+  }
+  return null;
+}
+
+function getChildIcon(child) {
+  const content = getChildContent(child);
+  if (content && content.icon) return content.icon;
+  return child.type === 'item' ? '📖' : '📁';
 }
 </script>
 
@@ -304,12 +349,15 @@ function formatBytes(bytes) {
 }
 
 .item-card {
-  padding: 1.5rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
   gap: 1rem;
 }
-.item-card .icon { font-size: 2.5rem; }
+.item-card .icon { font-size: 2.5rem; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; }
+.item-card-image { width: 60px; height: 60px; flex-shrink: 0; border-radius: 8px; overflow: hidden; background: #f0f0f0; }
+.preview-img { width: 100%; height: 100%; object-fit: cover; }
+
 .item-card .name { font-weight: 600; font-size: 1.05rem; margin-bottom: 0.2rem; }
 .item-card .type { font-size: 0.85rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
 

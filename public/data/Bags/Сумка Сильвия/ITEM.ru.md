@@ -1,4 +1,6 @@
 ---
+title: "Сумка Сильвия"
+preview: "Сумка Сильвия.pdf.preview.jpg"
 files:
   - "Сумка Сильвия.pdf"
 ---

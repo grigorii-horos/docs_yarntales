@@ -23,7 +23,6 @@ function buildTree(dirPath, basePath = '/data') {
     node.name = 'Root';
   }
 
-  // Check for FOLDER*.md or ITEM*.md
   let isItem = false;
   let isFolder = false;
 
@@ -33,6 +32,10 @@ function buildTree(dirPath, basePath = '/data') {
     const match = raw.match(frontmatterRegex);
     let text = raw;
     let allowedFiles = null;
+    let title = null;
+    let preview = null;
+    let icon = null;
+
     if (match) {
       text = raw.replace(frontmatterRegex, '');
       const yaml = match[1];
@@ -40,8 +43,16 @@ function buildTree(dirPath, basePath = '/data') {
       if (fileLines.length > 0) {
         allowedFiles = fileLines.map(l => l.replace(/^- /, '').replace(/["']/g, '').trim());
       }
+      const titleMatch = yaml.match(/^title:\s*(.*)$/m);
+      if (titleMatch) title = titleMatch[1].trim().replace(/^["']|["']$/g, '');
+
+      const previewMatch = yaml.match(/^preview:\s*(.*)$/m);
+      if (previewMatch) preview = previewMatch[1].trim().replace(/^["']|["']$/g, '');
+
+      const iconMatch = yaml.match(/^icon:\s*(.*)$/m);
+      if (iconMatch) icon = iconMatch[1].trim().replace(/^["']|["']$/g, '');
     }
-    return { text, allowedFiles };
+    return { text, allowedFiles, title, preview, icon };
   }
 
   for (const item of items) {
@@ -77,14 +88,12 @@ function buildTree(dirPath, basePath = '/data') {
       const childNode = buildTree(fullPath, `${basePath}/${item}`);
       if (childNode) node.children.push(childNode);
     } else {
-      // It's a file
       const fileNode = {
         name: item,
         path: `${basePath}/${item}`,
         size: itemStat.size
       };
 
-      // Check meta
       const metaPath = `${fullPath}.meta.json`;
       if (fs.existsSync(metaPath)) {
         try {
@@ -92,7 +101,6 @@ function buildTree(dirPath, basePath = '/data') {
         } catch(e){}
       }
 
-      // Check preview
       if (fs.existsSync(`${fullPath}.preview.jpg`)) {
         fileNode.preview = `${fileNode.path}.preview.jpg`;
       } else if (fs.existsSync(`${fullPath}.preview.png`)) {
@@ -103,7 +111,6 @@ function buildTree(dirPath, basePath = '/data') {
     }
   }
 
-  // Sort children
   node.children.sort((a, b) => a.name.localeCompare(b.name));
   node.files.sort((a, b) => a.name.localeCompare(b.name));
 
