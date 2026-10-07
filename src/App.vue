@@ -7,9 +7,6 @@
         <span>Yarntales Instructions</span>
       </div>
       <div class="header-actions">
-        <div class="search-bar">
-          <input type="text" placeholder="Search instructions..." v-model="searchQuery" />
-        </div>
         <select v-model="currentLang" class="lang-select">
           <option value="ru">RU</option>
           <option value="en">EN</option>
@@ -35,13 +32,6 @@
 
       <!-- Content -->
       <main class="content-area" v-if="currentNode">
-        <div class="breadcrumbs">
-          <span v-for="(crumb, idx) in breadcrumbs" :key="idx">
-            <span class="crumb" @click="navigate(crumb.path)">{{ crumb.name }}</span>
-            <span class="separator" v-if="idx < breadcrumbs.length - 1">›</span>
-          </span>
-        </div>
-
         <div class="scroll-area">
           
           <!-- ITEM / FOLDER Markdown Content -->
@@ -110,7 +100,6 @@ import TreeNode from './components/TreeNode.vue'
 
 const tree = ref(null)
 const currentPath = ref('/data')
-const searchQuery = ref('')
 const currentLang = ref('ru')
 
 onMounted(async () => {
@@ -152,12 +141,7 @@ const parsedContent = computed(() => {
 
 const filteredChildren = computed(() => {
   if (!currentNode.value || !currentNode.value.children) return [];
-  if (!searchQuery.value) return currentNode.value.children;
-  const q = searchQuery.value.toLowerCase();
-  return currentNode.value.children.filter(c => {
-    const name = getChildName(c).toLowerCase();
-    return name.includes(q) || c.name.toLowerCase().includes(q);
-  });
+  return currentNode.value.children;
 })
 
 const filteredFiles = computed(() => {
@@ -171,39 +155,11 @@ const filteredFiles = computed(() => {
     files = files.filter(f => allowed.includes(f.name));
   }
 
-  if (searchQuery.value) {
-    const q = searchQuery.value.toLowerCase();
-    files = files.filter(f => f.name.toLowerCase().includes(q) || (f.meta && f.meta.title && f.meta.title.toLowerCase().includes(q)));
-  }
   return files;
-})
-
-const breadcrumbs = computed(() => {
-  if (currentPath.value === '/data') return [{ name: 'Home', path: '/data' }]
-  const parts = currentPath.value.replace('/data', '').split('/').filter(Boolean)
-  let acc = '/data'
-  const crumbs = [{ name: 'Home', path: '/data' }]
-  let currentSearchNode = tree.value;
-
-  parts.forEach(p => {
-    acc += '/' + p
-    // Find node to get its localized title if available
-    let nodeName = p;
-    if (currentSearchNode && currentSearchNode.children) {
-      const child = currentSearchNode.children.find(c => c.name === p);
-      if (child) {
-        nodeName = getChildName(child);
-        currentSearchNode = child;
-      }
-    }
-    crumbs.push({ name: nodeName, path: acc })
-  })
-  return crumbs
 })
 
 function navigate(path) {
   currentPath.value = path
-  searchQuery.value = ''
 }
 
 function formatBytes(bytes) {
@@ -263,14 +219,6 @@ function getChildIcon(child) {
 }
 .logo { font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
 .header-actions { display: flex; align-items: center; gap: 1rem; }
-.search-bar input {
-  padding: 0.6rem 1rem;
-  width: 300px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  outline: none;
-}
-.search-bar input:focus { border-color: #0070f3; }
 .lang-select {
   padding: 0.5rem;
   border-radius: 8px;
@@ -297,11 +245,6 @@ function getChildIcon(child) {
   background: #fafafa;
   overflow: hidden;
 }
-
-.breadcrumbs { padding: 1.5rem 2rem 0; font-size: 0.95rem; color: #666; }
-.crumb { cursor: pointer; color: #0070f3; }
-.crumb:hover { text-decoration: underline; }
-.separator { margin: 0 0.5rem; color: #999; }
 
 .scroll-area {
   flex: 1;
