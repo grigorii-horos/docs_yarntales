@@ -1,49 +1,44 @@
-[
-  {
-    "name": "archive",
-    "path": "/data/archive",
-    "type": "directory",
-    "size": 92,
-    "updatedAt": "2026-10-07T18:27:34.060Z",
-    "children": [
-      {
-        "name": "data.txt",
-        "path": "/data/archive/data.txt",
-        "type": "file",
-        "size": 4,
-        "updatedAt": "2026-10-07T18:25:46.544Z",
-        "meta": {
-          "title": "Сырые данные",
-          "description": "Текстовый файл с некоторыми данными."
-        },
-        "preview": "/data/archive/data.txt.preview.png"
-      }
-    ]
-  },
-  {
-    "name": "demo-image.jpg",
-    "path": "/data/demo-image.jpg",
-    "type": "file",
-    "size": 54365,
-    "updatedAt": "2026-10-07T18:25:38.408Z",
-    "meta": {
-      "title": "Обзорное фото",
-      "description": "Фотография продукта в высоком разрешении.",
-      "camera": "Sony A7III",
-      "tags": "photo, product, demo"
+{
+  "name": "Root",
+  "path": "/data",
+  "type": "folder",
+  "children": [
+    {
+      "name": "Product A",
+      "path": "/data/Product A",
+      "type": "folder",
+      "children": [
+        {
+          "name": "Assembly Guide",
+          "path": "/data/Product A/Assembly Guide",
+          "type": "item",
+          "children": [],
+          "files": [
+            {
+              "name": "blueprint.pdf",
+              "path": "/data/Product A/Assembly Guide/blueprint.pdf",
+              "size": 13264,
+              "meta": {
+                "title": "Официальный чертеж (PDF)"
+              },
+              "preview": "/data/Product A/Assembly Guide/blueprint.pdf.preview.jpg"
+            }
+          ],
+          "content": "# How to Assemble the Magic Loom\n1. Open the box.\n2. Put the pieces together.\n3. You are done!\n\nEnjoy weaving.\n"
+        }
+      ],
+      "files": [],
+      "content": "# Product A: Magic Loom\nThis is the main category for the Magic Loom. Below you can find its instructions and files.\n"
+    },
+    {
+      "name": "Product B",
+      "path": "/data/Product B",
+      "type": "item",
+      "children": [],
+      "files": [],
+      "content": "# Product B: Thread Spinner\nThis product has no subfolders, just a single instruction page!\n\n## Usage\nSpin it really fast.\n"
     }
-  },
-  {
-    "name": "sample.pdf",
-    "path": "/data/sample.pdf",
-    "type": "file",
-    "size": 13264,
-    "updatedAt": "2026-10-07T18:25:38.098Z",
-    "meta": {
-      "title": "Инструкция PDF",
-      "description": "Это подробная инструкция в формате PDF.",
-      "author": "Yarntales Team",
-      "version": "1.0.0"
-    }
-  }
-]
+  ],
+  "files": [],
+  "content": "# Yarntales Documentation\nWelcome to the root directory! Please select a product below.\n"
+}
