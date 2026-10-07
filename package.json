@@ -10,7 +10,9 @@
     "docs:preview": "vitepress preview",
     "dev": "node scripts/generate-tree.js && vite",
     "build": "node scripts/generate-tree.js && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prebuild": "node scripts/generate-previews.js",
+    "predev": "node scripts/generate-previews.js"
   },
   "repository": {
     "type": "git",

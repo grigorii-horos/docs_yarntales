@@ -129,14 +129,16 @@ const currentNode = computed(() => {
   return findNode(tree.value, currentPath.value)
 })
 
+const currentContentObj = computed(() => {
+  if (!currentNode.value || !currentNode.value.content) return null;
+  return currentNode.value.content[currentLang.value] 
+      || currentNode.value.content['default']
+      || Object.values(currentNode.value.content)[0];
+})
+
 const parsedContent = computed(() => {
-  if (currentNode.value && currentNode.value.content) {
-    const text = currentNode.value.content[currentLang.value] 
-              || currentNode.value.content['default']
-              || Object.values(currentNode.value.content)[0];
-    if (text) {
-      return marked(text)
-    }
+  if (currentContentObj.value && currentContentObj.value.text) {
+    return marked(currentContentObj.value.text)
   }
   return ''
 })
@@ -150,9 +152,20 @@ const filteredChildren = computed(() => {
 
 const filteredFiles = computed(() => {
   if (!currentNode.value || !currentNode.value.files) return [];
-  if (!searchQuery.value) return currentNode.value.files;
-  const q = searchQuery.value.toLowerCase();
-  return currentNode.value.files.filter(f => f.name.toLowerCase().includes(q) || (f.meta && f.meta.title && f.meta.title.toLowerCase().includes(q)));
+  
+  let files = currentNode.value.files;
+  
+  // Filter by allowed files from frontmatter
+  if (currentContentObj.value && currentContentObj.value.allowedFiles) {
+    const allowed = currentContentObj.value.allowedFiles;
+    files = files.filter(f => allowed.includes(f.name));
+  }
+
+  if (searchQuery.value) {
+    const q = searchQuery.value.toLowerCase();
+    files = files.filter(f => f.name.toLowerCase().includes(q) || (f.meta && f.meta.title && f.meta.title.toLowerCase().includes(q)));
+  }
+  return files;
 })
 
 const breadcrumbs = computed(() => {

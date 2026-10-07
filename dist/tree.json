@@ -3,17 +3,93 @@
   "path": "/data",
   "type": "folder",
   "content": {
-    "en": "# Yarntales Documentation\nWelcome! Please select a product below.\n",
-    "default": "# Yarntales Documentation\nWelcome to the root directory! Please select a product below.\n",
-    "ru": "# Документация Yarntales\nДобро пожаловать! Выберите продукт ниже.\n"
+    "en": {
+      "text": "# Yarntales Documentation\nWelcome! Please select a product below.\n",
+      "allowedFiles": null
+    },
+    "default": {
+      "text": "# Yarntales Documentation\nWelcome to the root directory! Please select a product below.\n",
+      "allowedFiles": null
+    },
+    "ru": {
+      "text": "# Документация Yarntales\nДобро пожаловать! Выберите продукт ниже.\n",
+      "allowedFiles": null
+    }
   },
   "children": [
+    {
+      "name": "Bags",
+      "path": "/data/Bags",
+      "type": "item",
+      "content": {
+        "en": {
+          "text": "# Care Instructions (Silvia Bag)\nHere we show only one file for the English version.\n",
+          "allowedFiles": [
+            "- Сумка Сильвия.pdf"
+          ]
+        },
+        "ru": {
+          "text": "# Инструкции по уходу (Сумка Роза)\nЗдесь мы показываем только один файл для русской версии.\n",
+          "allowedFiles": [
+            "- Сумка Роза.pdf"
+          ]
+        }
+      },
+      "children": [],
+      "files": [
+        {
+          "name": "Авоська з пайетками.pdf",
+          "path": "/data/Bags/Авоська з пайетками.pdf",
+          "size": 1390641,
+          "preview": "/data/Bags/Авоська з пайетками.pdf.preview.jpg"
+        },
+        {
+          "name": "Ажурный шоппер Bloom.pdf",
+          "path": "/data/Bags/Ажурный шоппер Bloom.pdf",
+          "size": 1144510,
+          "preview": "/data/Bags/Ажурный шоппер Bloom.pdf.preview.jpg"
+        },
+        {
+          "name": "Повседневная сумка-тоут XL.pdf",
+          "path": "/data/Bags/Повседневная сумка-тоут XL.pdf",
+          "size": 1587860,
+          "preview": "/data/Bags/Повседневная сумка-тоут XL.pdf.preview.jpg"
+        },
+        {
+          "name": "Структурная сумка для ноутбука.pdf",
+          "path": "/data/Bags/Структурная сумка для ноутбука.pdf",
+          "size": 1498141,
+          "preview": "/data/Bags/Структурная сумка для ноутбука.pdf.preview.jpg"
+        },
+        {
+          "name": "Сумка Роза.pdf",
+          "path": "/data/Bags/Сумка Роза.pdf",
+          "size": 1055131,
+          "preview": "/data/Bags/Сумка Роза.pdf.preview.jpg"
+        },
+        {
+          "name": "Сумка Сильвия.pdf",
+          "path": "/data/Bags/Сумка Сильвия.pdf",
+          "size": 1381801,
+          "preview": "/data/Bags/Сумка Сильвия.pdf.preview.jpg"
+        },
+        {
+          "name": "Сумка-бананка.pdf",
+          "path": "/data/Bags/Сумка-бананка.pdf",
+          "size": 1105441,
+          "preview": "/data/Bags/Сумка-бананка.pdf.preview.jpg"
+        }
+      ]
+    },
     {
       "name": "Product A",
       "path": "/data/Product A",
       "type": "folder",
       "content": {
-        "default": "# Product A: Magic Loom\nThis is the main category for the Magic Loom. Below you can find its instructions and files.\n"
+        "default": {
+          "text": "# Product A: Magic Loom\nThis is the main category for the Magic Loom. Below you can find its instructions and files.\n",
+          "allowedFiles": null
+        }
       },
       "children": [
         {
@@ -21,7 +97,10 @@
           "path": "/data/Product A/Assembly Guide",
           "type": "item",
           "content": {
-            "default": "# How to Assemble the Magic Loom\n1. Open the box.\n2. Put the pieces together.\n3. You are done!\n\nEnjoy weaving.\n"
+            "default": {
+              "text": "# How to Assemble the Magic Loom\n1. Open the box.\n2. Put the pieces together.\n3. You are done!\n\nEnjoy weaving.\n",
+              "allowedFiles": null
+            }
           },
           "children": [],
           "files": [
@@ -44,9 +123,18 @@
       "path": "/data/Product B",
       "type": "item",
       "content": {
-        "default": "# Product B: Thread Spinner\nThis product has no subfolders, just a single instruction page!\n\n## Usage\nSpin it really fast.\n",
-        "ro": "# Produs B: Roată de tors\nInstrucțiuni în limba română.\n",
-        "ru": "# Продукт B: Прялка\nИнструкция на русском языке.\n"
+        "default": {
+          "text": "# Product B: Thread Spinner\nThis product has no subfolders, just a single instruction page!\n\n## Usage\nSpin it really fast.\n",
+          "allowedFiles": null
+        },
+        "ro": {
+          "text": "# Produs B: Roată de tors\nInstrucțiuni în limba română.\n",
+          "allowedFiles": null
+        },
+        "ru": {
+          "text": "# Продукт B: Прялка\nИнструкция на русском языке.\n",
+          "allowedFiles": null
+        }
       },
       "children": [],
       "files": []

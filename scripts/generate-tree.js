@@ -27,17 +27,34 @@ function buildTree(dirPath, basePath = '/data') {
   let isItem = false;
   let isFolder = false;
 
+  function parseContent(filePath) {
+    const raw = fs.readFileSync(filePath, 'utf-8');
+    const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n/;
+    const match = raw.match(frontmatterRegex);
+    let text = raw;
+    let allowedFiles = null;
+    if (match) {
+      text = raw.replace(frontmatterRegex, '');
+      const yaml = match[1];
+      const fileLines = yaml.split('\n').filter(l => l.trim().startsWith('- '));
+      if (fileLines.length > 0) {
+        allowedFiles = fileLines.map(l => l.replace(/^- /, '').replace(/["']/g, '').trim());
+      }
+    }
+    return { text, allowedFiles };
+  }
+
   for (const item of items) {
     if (item.startsWith('ITEM') && item.endsWith('.md')) {
       isItem = true;
       const langMatch = item.match(/ITEM\.([a-z]{2})\.md$/);
       const lang = langMatch ? langMatch[1] : 'default';
-      node.content[lang] = fs.readFileSync(path.join(dirPath, item), 'utf-8');
+      node.content[lang] = parseContent(path.join(dirPath, item));
     } else if (item.startsWith('FOLDER') && item.endsWith('.md')) {
       isFolder = true;
       const langMatch = item.match(/FOLDER\.([a-z]{2})\.md$/);
       const lang = langMatch ? langMatch[1] : 'default';
-      node.content[lang] = fs.readFileSync(path.join(dirPath, item), 'utf-8');
+      node.content[lang] = parseContent(path.join(dirPath, item));
     }
   }
 
