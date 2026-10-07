@@ -14,6 +14,7 @@ function buildTree(dirPath, basePath = '/data') {
     name: path.basename(dirPath),
     path: basePath,
     type: 'folder',
+    content: {},
     children: [],
     files: []
   };
@@ -22,19 +23,34 @@ function buildTree(dirPath, basePath = '/data') {
     node.name = 'Root';
   }
 
-  // Check for FOLDER.md or ITEM.md
-  if (items.includes('FOLDER.md')) {
-    node.type = 'folder';
-    node.content = fs.readFileSync(path.join(dirPath, 'FOLDER.md'), 'utf-8');
-  } else if (items.includes('ITEM.md')) {
+  // Check for FOLDER*.md or ITEM*.md
+  let isItem = false;
+  let isFolder = false;
+
+  for (const item of items) {
+    if (item.startsWith('ITEM') && item.endsWith('.md')) {
+      isItem = true;
+      const langMatch = item.match(/ITEM\.([a-z]{2})\.md$/);
+      const lang = langMatch ? langMatch[1] : 'default';
+      node.content[lang] = fs.readFileSync(path.join(dirPath, item), 'utf-8');
+    } else if (item.startsWith('FOLDER') && item.endsWith('.md')) {
+      isFolder = true;
+      const langMatch = item.match(/FOLDER\.([a-z]{2})\.md$/);
+      const lang = langMatch ? langMatch[1] : 'default';
+      node.content[lang] = fs.readFileSync(path.join(dirPath, item), 'utf-8');
+    }
+  }
+
+  if (isItem) {
     node.type = 'item';
-    node.content = fs.readFileSync(path.join(dirPath, 'ITEM.md'), 'utf-8');
+  } else if (isFolder) {
+    node.type = 'folder';
   } else {
-    node.type = 'folder'; // default
+    node.type = 'folder';
   }
 
   for (const item of items) {
-    if (item === 'FOLDER.md' || item === 'ITEM.md') continue;
+    if ((item.startsWith('FOLDER') || item.startsWith('ITEM')) && item.endsWith('.md')) continue;
     if (item.endsWith('.meta.json') || item.includes('.preview.')) continue;
 
     const fullPath = path.join(dirPath, item);

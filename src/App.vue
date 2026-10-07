@@ -6,8 +6,15 @@
         <span class="icon-logo">🧶</span>
         <span>Yarntales Instructions</span>
       </div>
-      <div class="search-bar">
-        <input type="text" placeholder="Search instructions..." v-model="searchQuery" />
+      <div class="header-actions">
+        <div class="search-bar">
+          <input type="text" placeholder="Search instructions..." v-model="searchQuery" />
+        </div>
+        <select v-model="currentLang" class="lang-select">
+          <option value="ru">RU</option>
+          <option value="en">EN</option>
+          <option value="ro">RO</option>
+        </select>
       </div>
     </header>
 
@@ -97,6 +104,7 @@ import TreeNode from './components/TreeNode.vue'
 const tree = ref(null)
 const currentPath = ref('/data')
 const searchQuery = ref('')
+const currentLang = ref('ru')
 
 onMounted(async () => {
   try {
@@ -123,7 +131,12 @@ const currentNode = computed(() => {
 
 const parsedContent = computed(() => {
   if (currentNode.value && currentNode.value.content) {
-    return marked(currentNode.value.content)
+    const text = currentNode.value.content[currentLang.value] 
+              || currentNode.value.content['default']
+              || Object.values(currentNode.value.content)[0];
+    if (text) {
+      return marked(text)
+    }
   }
   return ''
 })
@@ -189,6 +202,7 @@ function formatBytes(bytes) {
   z-index: 10;
 }
 .logo { font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+.header-actions { display: flex; align-items: center; gap: 1rem; }
 .search-bar input {
   padding: 0.6rem 1rem;
   width: 300px;
@@ -197,6 +211,14 @@ function formatBytes(bytes) {
   outline: none;
 }
 .search-bar input:focus { border-color: #0070f3; }
+.lang-select {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  background: #fff;
+  cursor: pointer;
+}
 
 .main-layout { display: flex; flex: 1; overflow: hidden; }
 
