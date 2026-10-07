@@ -11,8 +11,8 @@ function buildTree(dirPath, basePath = '/data') {
   const items = fs.readdirSync(dirPath);
 
   for (const item of items) {
-    // Ignore meta files directly
-    if (item.endsWith('.meta.json')) continue;
+    // Ignore meta and preview files directly
+    if (item.endsWith('.meta.json') || item.includes('.preview.')) continue;
     
     const fullPath = path.join(dirPath, item);
     const stat = fs.statSync(fullPath);
@@ -37,6 +37,15 @@ function buildTree(dirPath, basePath = '/data') {
         } catch (e) {
           console.error(`Error parsing meta for ${item}:`, e);
         }
+      }
+
+      // Check for preview files (.preview.jpg, .preview.png)
+      const previewJpgPath = `${fullPath}.preview.jpg`;
+      const previewPngPath = `${fullPath}.preview.png`;
+      if (fs.existsSync(previewJpgPath)) {
+        node.preview = `${node.path}.preview.jpg`;
+      } else if (fs.existsSync(previewPngPath)) {
+        node.preview = `${node.path}.preview.png`;
       }
     }
     result.push(node);

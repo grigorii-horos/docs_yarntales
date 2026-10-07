@@ -3,8 +3,8 @@
     "name": "archive",
     "path": "/data/archive",
     "type": "directory",
-    "size": 52,
-    "updatedAt": "2026-10-07T18:25:50.720Z",
+    "size": 92,
+    "updatedAt": "2026-10-07T18:27:34.060Z",
     "children": [
       {
         "name": "data.txt",
@@ -15,7 +15,8 @@
         "meta": {
           "title": "Сырые данные",
           "description": "Текстовый файл с некоторыми данными."
-        }
+        },
+        "preview": "/data/archive/data.txt.preview.png"
       }
     ]
   },

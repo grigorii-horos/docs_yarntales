@@ -39,7 +39,8 @@
             @click="handleItemClick(item)"
           >
             <div class="icon">
-              {{ item.type === 'directory' ? '📁' : '📄' }}
+              <img v-if="item.preview" :src="item.preview" class="thumbnail" alt="Thumb" />
+              <span v-else>{{ item.type === 'directory' ? '📁' : '📄' }}</span>
             </div>
             <div class="details">
               <div class="name">{{ item.name }}</div>
@@ -62,7 +63,8 @@
           
           <div class="preview-container">
             <div class="preview-pane">
-              <img v-if="isImage(selectedFile.name)" :src="selectedFile.path" alt="Preview" />
+              <img v-if="selectedFile.preview" :src="selectedFile.preview" alt="Preview" />
+              <img v-else-if="isImage(selectedFile.name)" :src="selectedFile.path" alt="Preview" />
               <iframe v-else-if="isPdf(selectedFile.name)" :src="selectedFile.path" frameborder="0"></iframe>
               <div v-else class="no-preview">
                 No visual preview available for this file type.
@@ -228,7 +230,8 @@ function formatBytes(bytes) {
   transition: shadow 0.2s;
 }
 .card:hover { box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-.card .icon { font-size: 2rem; }
+.card .icon { font-size: 2rem; display: flex; align-items: center; justify-content: center; }
+.thumbnail { width: 48px; height: 48px; object-fit: cover; border-radius: 4px; }
 .card .name { font-weight: 500; word-break: break-all; }
 .card .meta { font-size: 0.8rem; color: #6b7280; margin-top: 0.25rem; }
 
