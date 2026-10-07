@@ -34,21 +34,21 @@
         "en": {
           "text": "# Bag Care Instructions\nHere you can find all care instructions for our bags.\n",
           "allowedFiles": null,
-          "title": null,
+          "title": "Bags",
           "preview": null,
           "icon": null
         },
         "ro": {
           "text": "# Instrucțiuni pentru genți\nAici găsiți toate instrucțiunile de îngrijire pentru gențile noastre. Alegeți una de mai jos:\n",
           "allowedFiles": null,
-          "title": null,
+          "title": "Genți",
           "preview": null,
           "icon": null
         },
         "ru": {
           "text": "# Инструкции к сумкам\nЗдесь собраны все инструкции по уходу за нашими сумками. Выберите нужную ниже:\n",
           "allowedFiles": null,
-          "title": null,
+          "title": "Сумки",
           "preview": null,
           "icon": null
         }
